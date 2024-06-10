@@ -1,6 +1,5 @@
 package com.example;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +7,7 @@ public class Player extends Item  {
     private int health;
     private List<Item> inventory;
     private Score score;
-    private Map map;
+    private MazeMap mazeMap;
 
     public Player(double x, double y) {
         super(x, y);
@@ -17,8 +16,8 @@ public class Player extends Item  {
         this.score = new Score();
     }
 
-    public void setMap(Map map) {
-        this.map = map;
+    public void setMap(MazeMap mazeMap) {
+        this.mazeMap = mazeMap;
     }
 
     public void move(String direction) {
@@ -40,7 +39,7 @@ public class Player extends Item  {
                 break;
         }
 
-        if (map.canMoveTo(newX, newY,false)) {
+        if (mazeMap.canMoveTo(newX, newY,false)) {
             x = newX;
             y = newY;
         }

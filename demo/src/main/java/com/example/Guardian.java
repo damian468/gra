@@ -3,7 +3,7 @@ package com.example;
 import java.util.Random;
 
 public class Guardian extends Enemy {
-    private Map map;
+    private MazeMap mazeMap;
     private Random random = new Random();
 
     public Guardian(double x, double y, int damage, int stepLimit) {
@@ -17,7 +17,7 @@ public class Guardian extends Enemy {
         int direction = random.nextInt(4);
         double newX = getX() + dx[direction];
         double newY = getY() + dy[direction];
-        if (map.canMoveTo(newX, newY,false)) {
+        if (mazeMap.canMoveTo(newX, newY,false)) {
             setX(newX);
             setY(newY);
         }
@@ -28,7 +28,7 @@ public class Guardian extends Enemy {
         player.reduceHealth(damage);
     }
 
-    public void setMap(Map map) {
-        this.map = map;
+    public void setMap(MazeMap mazeMap) {
+        this.mazeMap = mazeMap;
     }
 }

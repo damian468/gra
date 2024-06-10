@@ -1,17 +1,17 @@
 package com.example;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
-
+import java.util.Map;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class Level implements Serializable {
-    private Map map;
+    private MazeMap map;
     private Player player;
     private List<Enemy> enemies;
     private List<Trap> traps;
@@ -38,43 +38,66 @@ public class Level implements Serializable {
     }
 
     public void loadLevelData(int level) {
-        map = new Map();
-        map.loadMap(level);
+        map = new MazeMap();
+        String lvlMapPath, lvlconfigPath;
+        switch (level){
+            case 1: lvlMapPath = "/levels/level1.txt";
+                lvlconfigPath = "/levels/config_lvl1.txt";
+                break;
+            case 2: lvlMapPath = "/levels/level2.txt";
+                lvlconfigPath = "/levels/config_lvl2.txt";
+                break;
+            case 3: lvlMapPath = "/levels/level3.txt";
+                lvlconfigPath = "/levels/config_lvl3.txt";
+                break;
+            default: lvlMapPath = "/levels/level1.txt";
+                lvlconfigPath = "/levels/config_lvl1.txt";
+                break;
+        }
+        map.loadMap(lvlMapPath);
 
         player = new Player(1, 1);
         player.setMap(map);
-
-
         List<int[]> availablePositions = map.getAvailablePositions();
 
         int[] pos;
 
-        //doorX, doorY, ghosts, guardians, traps,potions, treasures, key
-        int[] level1 = {38, 27, 7,3,8,4, 10, 0};
-        int[] level2 = {38, 1, 3,5,3,7, 10, 1};
-        int[] level3 = {18, 13, 7,3,8,4, 20, 0};
-        int[][] levels = {level1, level2, level3};
 
+        Map<String, Integer> levelData = new HashMap<>();
 
-
-
-        if(levels[level-1][7] == 0){
-            pos = getRandomPosition(availablePositions);
-            doors.add(new Door(levels[level-1][0], levels[level-1][1], null));
-            levers.add(new Lever(pos[1], pos[0], doors.get(0)));
+        try (Scanner scanner =  new Scanner(getClass().getResourceAsStream(lvlconfigPath))) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split(" : ");
+                if (parts.length == 2) {
+                    String item = parts[0].trim();
+                    int number = Integer.parseInt(parts[1].trim());
+                    levelData.put(item, number);
+                }
+            }
         }
-        else{
 
-            for(int i = 0; i < 3; i++){
+        //doorX, doorY, ghosts, guardians, traps,potions, treasures, key
+
+
+        if(levelData.get("Keys") > 0){
+
+            for(int i = 0; i < levelData.get("Keys"); i++){
                 pos = getRandomPosition(availablePositions);
                 keys.add(new Key(pos[1], pos[0], 1));
-                doors.add(new Door(levels[level-1][0], levels[level-1][1], keys.get(0)));
+
             }
+            doors.add(new Door(levelData.get("DoorX"),levelData.get("DoorY"), keys.get(0)));
+        }
+        else{
+            pos = getRandomPosition(availablePositions);
+            doors.add(new Door(levelData.get("DoorX"), levelData.get("DoorY"), null));
+            levers.add(new Lever(pos[1], pos[0], doors.get(0)));
 
         }
 
 
-        for(int i=0; i < levels[level-1][2]; i++){
+        for(int i=0; i < levelData.get("Ghosts"); i++){
             pos = getRandomPosition(availablePositions);
             Ghost ghost = new Ghost(pos[1], pos[0], 10, 5);
             ghost.setMap(map);
@@ -82,10 +105,10 @@ public class Level implements Serializable {
 
         }
 
-        Guardian guardian = new Guardian(levels[level-1][0], levels[level-1][1], 20, 3);
+        Guardian guardian = new Guardian(levelData.get("DoorX"), levelData.get("DoorY"), 20, 3);
         guardian.setMap(map);
         enemies.add(guardian);
-        for(int i=0; i < levels[level-1][3]-1; i++){
+        for(int i=0; i < levelData.get("Guardians")-1; i++){
             pos = getRandomPosition(availablePositions);
             guardian = new Guardian(pos[1], pos[0], 20, 3);
             guardian.setMap(map);
@@ -94,7 +117,7 @@ public class Level implements Serializable {
         }
 
 
-        for(int i=0; i < levels[level-1][4]; i++){
+        for(int i=0; i < levelData.get("Traps"); i++){
             pos = getRandomPosition(availablePositions);
             traps.add(new Trap(pos[1], pos[0], 10));
 
@@ -102,11 +125,11 @@ public class Level implements Serializable {
 
 
 
-        for(int i=0; i < levels[level-1][5]; i++) {
+        for(int i=0; i < levelData.get("Potions"); i++) {
             pos = getRandomPosition(availablePositions);
             potions.add(new Potion(pos[1], pos[0], 20));
         }
-        for(int i=0; i < levels[level-1][6]; i++) {
+        for(int i=0; i < levelData.get("Treasures"); i++) {
             pos = getRandomPosition(availablePositions);
             treasures.add(new Treasure(pos[1], pos[0]));
         }

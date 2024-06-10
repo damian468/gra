@@ -1,0 +1,9 @@
+Keys : 3
+DoorX : 38
+DoorY : 1
+Ghosts : 3
+Guardians : 5
+Traps : 3
+Potions : 7
+Treasures : 10
+
