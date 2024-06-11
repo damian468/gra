@@ -11,13 +11,6 @@ public class Key extends Position {
         this.keyId = keyId;
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
 
     @Override
     public void interact(Player player) {
