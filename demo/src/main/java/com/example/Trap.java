@@ -2,7 +2,7 @@ package com.example;
 
 
 
-public class Trap extends Item  {
+public class Trap extends Position {
     private int damage;
 
     public Trap(double x, double y, int damage) {

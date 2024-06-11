@@ -3,9 +3,9 @@ package com.example;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player extends Item  {
+public class Player extends Position {
     private int health;
-    private List<Item> inventory;
+    private List<Key> inventory;
     private Score score;
     private MazeMap mazeMap;
 
@@ -77,12 +77,12 @@ public class Player extends Item  {
 
 
 
-    public List<Item> getInventory() {
+    public List<Key> getInventory() {
         return inventory;
     }
 
-    public void setInventory(Item item) {
-        inventory.add(item);
+    public void setInventory(Key key) {
+        inventory.add(key);
     }
     public Score getScore() {
         return score;

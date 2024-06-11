@@ -2,7 +2,7 @@ package com.example;
 
 
 
-public class Lever extends Item {
+public class Lever extends Position {
     private Door linkedDoor;
 
     public Lever(double x, double y, Door linkedDoor) {

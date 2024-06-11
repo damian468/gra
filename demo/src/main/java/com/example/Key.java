@@ -2,7 +2,7 @@ package com.example;
 
 
 
-public class Key extends Item {
+public class Key extends Position {
     private int keyId;
 
     public Key(double x, double y, int keyId) {

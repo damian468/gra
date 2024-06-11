@@ -1,8 +1,6 @@
 package com.example;
 
-import java.io.Serializable;
-
-public class Door extends Item {
+public class Door extends Position {
     private boolean isOpen;
     private Key key;
 

@@ -1,9 +1,9 @@
 package com.example;
 
-import java.io.Serializable;
+
 import java.util.Random;
 
-public class Treasure extends Item {
+public class Treasure extends Position {
     private boolean isCollected;
     private Score score;
     public Treasure(double x, double y) {

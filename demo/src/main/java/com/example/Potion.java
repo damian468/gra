@@ -1,7 +1,7 @@
 package com.example;
 
 
-public class Potion extends Item {
+public class Potion extends Position {
     private int healthRestore;
 
     public Potion(double x, double y, int healthRestore) {
