@@ -1,6 +1,6 @@
 package com.example;
 
-import java.io.Serializable;
+
 
 public class Key extends Item {
     private int keyId;

@@ -9,19 +9,15 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +30,6 @@ public class Game extends Application implements Serializable{
     private Score score;
     private boolean isGameOver;
     private boolean isPaused;
-    private final int TILE_SIZE = 20; //kafelki
     private Label scoreLabel;
     private Label healthLabel;
     @Override
@@ -216,10 +211,11 @@ public class Game extends Application implements Serializable{
             oos.writeObject(levels);
             oos.writeObject(currentLevelIndex);
             oos.writeObject(score);
-            System.out.println("Game saved successfully.");
+
+            showAlert("", "Game saved successfully.");
         } catch (IOException e) {
             showAlert("Save Error", "An error occurred while saving the game.");
-            e.printStackTrace();
+
         }
     }
 
@@ -231,15 +227,15 @@ public class Game extends Application implements Serializable{
             isGameOver = false;
             isPaused = false;
             updateScore();
-            System.out.println("Game loaded successfully.");
+
         } catch (IOException | ClassNotFoundException e) {
-            showAlert("Load Error", "cant fine the file to load.");
-            e.printStackTrace();
+            showAlert("Load Error", "cant find the file to load.");
+
         }
     }
 
     private void showAlert(String title, String message) {
-        Alert alert = new Alert(AlertType.ERROR);
+        Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);

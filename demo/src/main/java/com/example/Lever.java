@@ -1,6 +1,6 @@
 package com.example;
 
-import java.io.Serializable;
+
 
 public class Lever extends Item {
     private Door linkedDoor;

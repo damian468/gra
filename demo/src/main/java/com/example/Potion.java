@@ -1,6 +1,5 @@
 package com.example;
 
-import java.io.Serializable;
 
 public class Potion extends Item {
     private int healthRestore;

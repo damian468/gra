@@ -75,9 +75,7 @@ public class Player extends Item  {
         health += amount;
     }
 
-    public void addItem(Item item) {
-        inventory.add(item);
-    }
+
 
     public List<Item> getInventory() {
         return inventory;
@@ -95,8 +93,5 @@ public class Player extends Item  {
         // ze soba to on nie zinteraktuje zabardzo XD
     }
 
-    public void collectTreasure(Treasure treasure) {
-        score.addPoints(10);
-        inventory.add(treasure);
-    }
+
 }

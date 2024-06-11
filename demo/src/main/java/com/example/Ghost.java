@@ -12,6 +12,7 @@ public class Ghost extends Enemy {
 
     @Override
     protected void performMove() {
+
         int[] dx = {-1, 0, 1, 0};
         int[] dy = {0, -1, 0, 1};
         int direction = random.nextInt(4);
