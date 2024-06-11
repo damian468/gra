@@ -45,13 +45,7 @@ public class Player extends Position {
         }
     }
 
-    public double getX() {
-        return x;
-    }
 
-    public double getY() {
-        return y;
-    }
 
     public int getHealth() {
         return health;
