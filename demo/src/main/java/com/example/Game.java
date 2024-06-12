@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
 
-
 public class Game extends Application implements Serializable{
     private List<Level> levels;
     private int currentLevelIndex;
@@ -178,7 +177,7 @@ public class Game extends Application implements Serializable{
         if (levels.get(currentLevelIndex).getPlayer().getHealth() <= 0) {
             isGameOver = true;
             showEndGameAlert("Game Over!", "You lost your health!");
-            System.out.println("Game Over!");
+
         }
     }
 

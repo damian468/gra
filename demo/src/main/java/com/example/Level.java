@@ -98,7 +98,7 @@ public class Level implements Serializable {
 
         for(int i=0; i < levelData.get("Ghosts"); i++){
             pos = getRandomPosition(availablePositions);
-            Ghost ghost = new Ghost(pos[1], pos[0], 10, 5);
+            Ghost ghost = new Ghost(pos[1], pos[0], 20, 5);
             ghost.setMap(map);
             enemies.add(ghost);
 
@@ -109,7 +109,7 @@ public class Level implements Serializable {
         enemies.add(guardian);
         for(int i=0; i < levelData.get("Guardians")-1; i++){
             pos = getRandomPosition(availablePositions);
-            guardian = new Guardian(pos[1], pos[0], 20, 3);
+            guardian = new Guardian(pos[1], pos[0], 5, 3);
             guardian.setMap(map);
             enemies.add(guardian);
 
